@@ -1,5 +1,5 @@
 -- ==============================================================================
--- CommandLink Telecom Lakehouse - Continuous Rollups & 95th Percentile Burst Window
+-- AegisTransit Telecom Lakehouse - Continuous Rollups & 95th Percentile Burst Window
 -- Target: PostgreSQL 16 Enterprise
 -- Calculates Monthly 95th Percentile Burstable Billing vs CIR Baseline
 -- ==============================================================================

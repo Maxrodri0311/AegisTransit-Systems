@@ -1,5 +1,5 @@
 # ==============================================================================
-# CommandLink SD-WAN Infrastructure - Variables
+# AegisTransit SD-WAN Infrastructure - Variables
 # Target: AWS FinOps & Observability
 # ==============================================================================
 
@@ -35,6 +35,6 @@ variable "burst_overage_alert_threshold_mbps" {
 
 variable "notification_email" {
   type        = string
-  default     = "finops-alerts@commandlink.com"
+  default     = "finops-alerts@aegistransit.io"
   description = "Corporate recipient for critical burst and hazard threshold events"
 }

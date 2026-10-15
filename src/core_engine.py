@@ -1,5 +1,5 @@
 """
-src/core_engine.py - Core Analytical & Algorithmic Engine for CommandLink (GP-260).
+src/core_engine.py - Core Analytical & Algorithmic Engine for AegisTransit Systems.
 Implements HiGHS Linear Programming Solver for 95th-percentile burst cost minimization
 and Kaplan-Meier / Cox Hazard Rate estimation for carrier contract lifecycles.
 Strictly decoupled under Dependency Inversion Principle (DIP).
@@ -388,12 +388,12 @@ def create_engine(
 
 
 if __name__ == "__main__":
-    print("[Core Engine] Initializing CommandLink Linear Optimization & Survival Engine...")
+    print("[Core Engine] Initializing AegisTransit Linear Optimization & Survival Engine...")
     engine = create_engine()
     results = engine.run_optimization_cycle(target_demand_mbps=9500.0, latency_budget_ms=22.0)
     opt = results["optimization"]
     print("\n" + "="*80)
-    print("  COMMANDLINK - SD-WAN MULTI-CARRIER 95TH-PERCENTILE TRANSIT OPTIMIZER")
+    print("  AEGISTRANSIT - SD-WAN MULTI-CARRIER 95TH-PERCENTILE TRANSIT OPTIMIZER")
     print("="*80)
     print(f"Solver Status       : {opt.solver_status}")
     print(f"Optimal Solution    : {opt.is_optimal} (Execution: {opt.execution_time_ms} ms)")

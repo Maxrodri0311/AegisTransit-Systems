@@ -1,8 +1,8 @@
 {
   "project_id": "GP-260",
-  "project_name": "commandlink_cost_optimization_analyst_bridge_project",
-  "repo_name": "commandlink-finance-linear-optimization-engine",
-  "target_company": "CommandLink",
+  "project_name": "sdwan_transit_cost_linear_optimizer",
+  "repo_name": "sdwan-transit-cost-linear-optimizer",
+  "target_company": "AegisTransit Systems",
   "target_role": "Cost Optimization Analyst",
   "paradigm": "DeliveryParadigm.CLI_TUI",
   "core_algorithm": "AlgorithmFamily.LINEAR_PROGRAMMING",

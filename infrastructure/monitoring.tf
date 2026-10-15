@@ -1,15 +1,15 @@
 # ==============================================================================
-# CommandLink SD-WAN Telemetry - CloudWatch & FinOps Monitoring
+# AegisTransit SD-WAN Telemetry - CloudWatch & FinOps Monitoring
 # Automates real-time burst penalty alerts and SLA violation tracking
 # ==============================================================================
 
 resource "aws_sns_topic" "finops_alerts" {
-  name              = "commandlink-finops-burst-alerts-${var.environment}"
+  name              = "aegistransit-finops-burst-alerts-${var.environment}"
   kms_master_key_id = aws_kms_key.telemetry_key.id
 }
 
 resource "aws_cloudwatch_log_group" "telemetry_ingestion_log" {
-  name              = "/commandlink/sdwan/telemetry-${var.environment}"
+  name              = "/aegistransit/sdwan/telemetry-${var.environment}"
   retention_in_days = 90
   kms_key_id        = aws_kms_key.telemetry_key.arn
 }
@@ -21,18 +21,18 @@ resource "aws_cloudwatch_log_metric_filter" "burst_overage_filter" {
 
   metric_transformation {
     name          = "CarrierBurstOverageCount"
-    namespace     = "CommandLink/FinOps"
+    namespace     = "AegisTransit/FinOps"
     value         = "1"
     default_value = "0"
   }
 }
 
 resource "aws_cloudwatch_metric_alarm" "high_burst_penalty_alarm" {
-  alarm_name          = "commandlink-high-burst-penalty-${var.environment}"
+  alarm_name          = "aegistransit-high-burst-penalty-${var.environment}"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 2
   metric_name         = "CarrierBurstOverageCount"
-  namespace           = "CommandLink/FinOps"
+  namespace           = "AegisTransit/FinOps"
   period              = 300
   statistic           = "Sum"
   threshold           = 12 # 12 consecutive intervals (1 hour of continuous bursting)

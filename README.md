@@ -1,6 +1,6 @@
 <!-- [SYSTEM INSTRUCTION]
-Blueprint: sdwan-transit-cost-linear-optimizer | Target: CommandLink - Cost Optimization Analyst
-Paradigm: CLI_TUI | Core Algorithm: LINEAR_PROGRAMMING (SciPy HiGHS) & CAUSAL_SURVIVAL (Kaplan-Meier & Cox PH)
+Blueprint: sdwan-transit-cost-linear-optimizer | Domain: Enterprise Telecom Transit & SD-WAN Cloud MSP
+Paradigm: CLI_TUI & Interactive Web Simulator | Core Algorithm: LINEAR_PROGRAMMING (SciPy HiGHS) & CAUSAL_SURVIVAL (Kaplan-Meier & Cox PH)
 Verified Benchmarks: p50 = 3.88ms, p95 = 5.74ms, p99 = 6.34ms (Target: < 150.0ms) | Memory: < 128MB
 Monthly Cost Reduction: +$1,720.83 USD/month (11.69% net variance savings per PoP) | Samples: 51,840 5-min intervals
 Author: Maximiliano Rodriguez | Canonical Profile: Data & Software Engineer (Semi-Senior / Mid-Level)
@@ -10,29 +10,30 @@ Canonical Repo: https://github.com/Maxrodri0311/sdwan-transit-cost-linear-optimi
 
 <div align="center">
 
-# 🌐 CommandLink: SD-WAN Multi-Carrier Transit Linear Cost Optimizer & Contract Survival Engine
+# 🌐 AegisTransit: SD-WAN Multi-Carrier Transit Linear Cost Optimizer & Contract Survival Engine
 
 ### Enterprise B2B Telecom Decision Support System combining Linear Programming (HiGHS) for 95th-Percentile Burstable Billing Arbitrage with Cox Proportional Hazards for Circuit Contract Lifecycles.
 
-[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![SciPy HiGHS](https://img.shields.io/badge/SciPy-HiGHS%20Solver-8CAAE6?style=for-the-badge&logo=scipy&logoColor=white)](https://scipy.org/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16%20Continuous%20Rollup-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![Terraform](https://img.shields.io/badge/Terraform-AWS%20S3%20Glacier%20FinOps-844FBA?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
-[![Rich CLI](https://img.shields.io/badge/Rich-TUI%20Executive%20Console-2088FF?style=for-the-badge&logo=gnometerminal&logoColor=white)](https://github.com/Textualize/rich)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Python 3.11+](https://img.shields.io/static/v1?label=Python&message=3.11%2B&color=3776AB&style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![SciPy HiGHS](https://img.shields.io/static/v1?label=SciPy&message=HiGHS%20Solver&color=8CAAE6&style=for-the-badge&logo=scipy&logoColor=white)](https://scipy.org/)
+[![PostgreSQL](https://img.shields.io/static/v1?label=PostgreSQL&message=16%20Continuous%20Rollup&color=4169E1&style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Terraform](https://img.shields.io/static/v1?label=Terraform&message=AWS%20S3%20Glacier%20FinOps&color=844FBA&style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![Rich CLI](https://img.shields.io/static/v1?label=Rich&message=TUI%20Executive%20Console&color=2088FF&style=for-the-badge&logo=gnometerminal&logoColor=white)](https://github.com/Textualize/rich)
+[![License: MIT](https://img.shields.io/static/v1?label=License&message=MIT&color=yellow&style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 <br/>
 
 ```
-  ██████╗ ██████╗ ███╗   ███╗███╗   ███╗ █████╗ ███╗   ██╗██████╗ ██╗     ██╗███╗   ██╗██╗  ██╗
- ██╔════╝██╔═══██╗████╗ ████║████╗ ████║██╔══██╗████╗  ██║██╔══██╗██║     ██║████╗  ██║██║ ██╔╝
- ██║     ██║   ██║██╔████╔██║██╔████╔██║███████║██╔██╗ ██║██║  ██║██║     ██║██╔██╗ ██║█████╔╝ 
- ██║     ██║   ██║██║╚██╔╝██║██║╚██╔╝██║██╔══██║██║╚██╗██║██║  ██║██║     ██║██║╚██╗██║██╔═██╗ 
- ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║██║  ██║██║ ╚████║██████╔╝███████╗██║██║ ╚████║██║  ██╗
-  ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝
+  █████╗ ███████╗ ██████╗ ██╗███████╗████████╗██████╗  █████╗ ███╗   ██╗███████╗██╗████████╗
+ ██╔══██╗██╔════╝██╔════╝ ██║██╔════╝╚══██╔══╝██╔══██╗██╔══██╗████╗  ██║██╔════╝██║╚══██╔══╝
+ ███████║█████╗  ██║  ███╗██║███████╗   ██║   ██████╔╝███████║██╔██╗ ██║███████╗██║   ██║   
+ ██╔══██║██╔══╝  ██║   ██║██║╚════██║   ██║   ██╔══██╗██╔══██║██║╚██╗██║╚════██║██║   ██║   
+ ██║  ██║███████╗╚██████╔╝██║███████║   ██║   ██║  ██║██║  ██║██║ ╚████║███████║██║   ██║   
+ ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝   ╚═╝   
 ```
 
-**[⚡ 1-Click Verification Demo](#-1-click-verification--benchmarks)** &nbsp;•&nbsp;
+**[⚡ 1-Click Verification Demo](#-6-1-click-verification--benchmarks)** &nbsp;•&nbsp;
+**[🖥️ Interactive Web Simulator (Live Demo)](web/index.html)** &nbsp;•&nbsp;
 **[📐 Mathematical Formulation](#-2-mathematical-formulation--optimization-model)** &nbsp;•&nbsp;
 **[📊 Architecture & DIP](#-3-clean-architecture--dependency-inversion-dip)** &nbsp;•&nbsp;
 **[📈 PostgreSQL Lakehouse Rollups](#-4-postgresql-continuous-rollups--sql-contracts)** &nbsp;•&nbsp;
@@ -44,7 +45,7 @@ Canonical Repo: https://github.com/Maxrodri0311/sdwan-transit-cost-linear-optimi
 
 ## 🏛️ 1. Executive Summary & Business Problem
 
-CommandLink manages mission-critical SD-WAN and hybrid multi-cloud transit infrastructures across Tier-1 telecom providers (Lumen, Cogent, Zayo, AT&T, Comcast, Verizon). 
+AegisTransit is an enterprise decision support platform designed for Tier-1 Telecom Managed Service Providers (MSPs) and hybrid multi-cloud transit infrastructures (integrating Apex Fiber Transit, Vanguard Backbone, Meridian Optical, Atlantic Carrier Services, Summit Broadband, and Pacific Dynamic Transit).
 
 In enterprise telecommunications, IP transit is billed using the **95th Percentile Burstable Billing Algorithm**:
 1. Port traffic is sampled every 5 minutes (8,640 samples/month).
@@ -60,6 +61,7 @@ An enterprise-grade optimization engine that:
 - Solves a **Linear Programming (LP)** model in **5.74 ms (p95)** to determine the optimal multi-carrier traffic split that minimizes aggregate burst penalties while respecting CIR baselines and SLA latency ceilings.
 - Models carrier circuit contract churn risk using non-parametric **Kaplan-Meier survival curves** and **Cox Proportional Hazards**, classifying contract renegotiation urgency into actionable FinOps recommendations.
 - Implements strict **Clean Architecture (DIP)** with interchangeable storage adapters (`InMemory` for sub-5ms testing and `Columnar` for 50,000+ Parquet/CSV.gz telemetry points).
+- Delivers dual presentation tiers: an interactive **Executive Web Simulator (`web/index.html`)** for real-time slider-based scenario testing and a **Rich Terminal UI (`src/interface.py`)** for automated operational pipelines.
 
 ---
 
@@ -116,6 +118,7 @@ flowchart TD
     end
 
     subgraph Delivery Layer
+        WEB[Interactive Web Simulator]
         TUI[Rich Terminal Executive Dashboard]
         JSON[RFC 8259 JSON Exporter]
         SQL[PostgreSQL 16 Continuous Rollups]
@@ -129,6 +132,7 @@ flowchart TD
     OPT --> LCOP
     SURV --> CSAP
     COE --> SRP
+    SRP --> WEB
     SRP --> TUI
     SRP --> JSON
     S3 -.-> DS
@@ -195,13 +199,16 @@ Circuits with a Hazard Ratio $\ge 2.5\times$ or at $\ge 80\%$ contract term are 
 # 1. Run full 1-Click operational suite (Windows):
 run_demo.bat
 
-# 2. Or execute via Python CLI directly:
+# 2. Or open the Interactive Web Simulator in your browser:
+start web/index.html
+
+# 3. Execute via Python CLI directly:
 python src/interface.py --demand 9500 --latency 22 --export-json data/report.json
 
-# 3. Run the automated Pytest test suite:
-pytest tests/test_suite.py -v
+# 4. Run the automated Pytest test suite:
+python -m pytest tests/test_suite.py -v
 
-# 4. Run the quantitative latency benchmark:
+# 5. Run the quantitative latency benchmark:
 python tests/benchmark.py
 ```
 
@@ -214,33 +221,43 @@ sdwan-transit-cost-linear-optimizer/
 │
 ├── analytics/
 │   └── queries/
-│       ├── 00_schema_ddl.sql          # Range-partitioned PostgreSQL telemetry DDL & BRIN index
-│       ├── 01_continuous_rollup.sql   # Materialized view with percentile_cont(0.95) billing window
-│       └── cohort_analysis.sql        # Carrier contract survival & churn hazard cohort analysis
+│       ├── 00_schema_ddl.sql                    # Range-partitioned PostgreSQL telemetry DDL & BRIN index
+│       ├── 01_continuous_rollup.sql             # Materialized view with percentile_cont(0.95) billing window
+│       ├── 02_event_triggers.sql                # PL/pgSQL procedural functions & audit triggers
+│       ├── 03_pop_latency_arbitrage.sql         # Regional PoP latency arbitrage and SLA routing query
+│       ├── 04_predictive_renewal_waterfall.sql  # Predictive contract renewal cashflow waterfall query
+│       └── cohort_analysis.sql                  # Carrier contract survival & churn hazard cohort analysis
 │
 ├── infrastructure/
-│   ├── main.tf                        # AWS S3 Glacier lifecycle tiering, KMS & Glue Catalog
-│   └── outputs.tf                     # Bucket ARNs and Glue database outputs
+│   ├── main.tf                                  # AWS S3 Glacier lifecycle tiering, KMS & Glue Catalog
+│   ├── variables.tf                             # Terraform variables for FinOps and observability
+│   ├── monitoring.tf                            # CloudWatch alarms, metric filters, and SNS alerts
+│   └── outputs.tf                               # Bucket ARNs and Glue database outputs
 │
 ├── src/
 │   ├── domain/
-│   │   ├── __init__.py                # Clean export of entities and DIP protocols
-│   │   ├── entities.py                # Pure domain models (CircuitLink, OptimizationResult)
-│   │   └── contracts.py               # DIP Protocols (TelemetryStorage, LinearOptimizer, etc.)
-│   ├── data_generator.py              # Calibrated stochastic 5-min multi-carrier telemetry generator
-│   ├── core_engine.py                 # HiGHS Linear Programming solver & Cox Survival analyzer
-│   └── interface.py                   # Rich Terminal User Interface (CLI/TUI Executive Console)
+│   │   ├── __init__.py                          # Clean export of entities and DIP protocols
+│   │   ├── entities.py                          # Pure domain models (CircuitLink, OptimizationResult)
+│   │   └── contracts.py                         # DIP Protocols (TelemetryStorage, LinearOptimizer, etc.)
+│   ├── data_generator.py                        # Calibrated stochastic 5-min multi-carrier telemetry generator
+│   ├── core_engine.py                           # HiGHS Linear Programming solver & Cox Survival analyzer
+│   └── interface.py                             # Rich Terminal User Interface (CLI/TUI Executive Console)
 │
 ├── tests/
-│   ├── test_suite.py                  # Pytest suite with isolated sub-5ms InMemory storage
-│   └── benchmark.py                   # Quantitative P50/P90/P95 latency benchmark (enforces <150ms)
+│   ├── test_suite.py                            # Pytest suite with isolated sub-5ms InMemory storage
+│   └── benchmark.py                             # Quantitative P50/P90/P95 latency benchmark (enforces <150ms)
 │
-├── 00_SPEC.md                         # Engineering architectural specification
-├── Makefile                           # Cross-platform build and execution recipes
-├── pyproject.toml                     # Python packaging and tool configuration
-├── pytest.ini                         # Pytest configuration settings
-├── requirements.txt                   # Production dependencies
-└── run_demo.bat                       # 1-Click interactive launcher for Windows
+├── web/
+│   ├── index.html                               # Modern aesthetic Web Simulator with interactive sliders
+│   ├── styles.css                               # Dark glassmorphism Vercel/Stripe aesthetic design system
+│   └── app.js                                   # Real-time client-side LP routing & Chart.js controller
+│
+├── 00_SPEC.md                                   # Engineering architectural specification
+├── Makefile                                     # Cross-platform build and execution recipes
+├── pyproject.toml                               # Python packaging and tool configuration
+├── pytest.ini                                   # Pytest configuration settings
+├── requirements.txt                             # Production dependencies
+└── run_demo.bat                                 # 1-Click interactive launcher for Windows
 ```
 
 ---

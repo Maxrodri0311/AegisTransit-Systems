@@ -1,5 +1,5 @@
 -- ==============================================================================
--- CommandLink Telecom Lakehouse - DDL & Partitioning Schema
+-- AegisTransit Telecom Lakehouse - DDL & Partitioning Schema
 -- Target: PostgreSQL 16 Enterprise / Amazon RDS Aurora
 -- Role: Cost Optimization Analyst
 -- Domain: Multi-Carrier SD-WAN Telemetry, 95th Percentile Burstable Billing

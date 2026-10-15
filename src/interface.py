@@ -1,6 +1,6 @@
 """
 src/interface.py - Rich Terminal User Interface (CLI_TUI Paradigm).
-Enterprise Executive Dashboard for CommandLink SD-WAN Transit Cost Optimization & Contract Survival.
+Enterprise Executive Dashboard for AegisTransit SD-WAN Transit Cost Optimization & Contract Survival.
 Strictly decoupled under SinkRendererProtocol.
 """
 
@@ -47,9 +47,9 @@ class RichTerminalRenderer:
     ) -> None:
         # Header Banner
         header_text = Text()
-        header_text.append("COMMANDLINK ", style="bold cyan")
+        header_text.append("AEGISTRANSIT ", style="bold cyan")
         header_text.append("| SD-WAN TRANSIT OPTIMIZER & SURVIVAL ENGINE\n", style="bold white")
-        header_text.append("95th-Percentile Burstable Billing Arbitrage & Contract Hazard Analytics (GP-260)", style="dim italic")
+        header_text.append("95th-Percentile Burstable Billing Arbitrage & Contract Hazard Analytics", style="dim italic")
 
         self.console.print(Panel(header_text, border_style="cyan", box=box.ROUNDED))
 
@@ -131,7 +131,7 @@ class RichTerminalRenderer:
 
 
 def run_cli():
-    parser = argparse.ArgumentParser(description="CommandLink SD-WAN Transit Cost Optimization Dashboard.")
+    parser = argparse.ArgumentParser(description="AegisTransit SD-WAN Transit Cost Optimization Dashboard.")
     parser.add_argument("--demand", type=float, default=9500.0, help="Aggregate traffic demand in Mbps to balance.")
     parser.add_argument("--latency", type=float, default=22.0, help="Nominal SLA latency constraint budget in ms.")
     parser.add_argument("--export-json", type=str, default="", help="Optional filepath to dump output as JSON.")

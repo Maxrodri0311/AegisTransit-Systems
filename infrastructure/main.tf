@@ -1,5 +1,5 @@
 # ==============================================================================
-# CommandLink SD-WAN Telemetry Lakehouse - Enterprise Infrastructure as Code
+# AegisTransit SD-WAN Telemetry Lakehouse - Enterprise Infrastructure as Code
 # Target: AWS / FinOps Cloud Architecture
 # Role: Cost Optimization Analyst
 # Strategy: S3 Lifecycle to Glacier Instant Retrieval, KMS, and Athena Data Catalog
@@ -20,7 +20,7 @@ provider "aws" {
   default_tags {
     tags = {
       Project     = "sdwan-transit-cost-linear-optimizer"
-      Company     = "CommandLink"
+      Product     = "AegisTransit"
       TargetRole  = "Cost Optimization Analyst"
       ManagedBy   = "Terraform"
       Environment = "Production"
@@ -43,14 +43,14 @@ variable "environment" {
 
 # KMS Key with Key Rotation enabled for Telemetry at Rest
 resource "aws_kms_key" "telemetry_key" {
-  description             = "KMS Key for CommandLink SD-WAN transit telemetry encryption"
+  description             = "KMS Key for AegisTransit SD-WAN transit telemetry encryption"
   deletion_window_in_days = 30
   enable_key_rotation     = true
 }
 
 # Telemetry Lakehouse S3 Bucket
 resource "aws_s3_bucket" "telemetry_lake" {
-  bucket        = "commandlink-sdwan-telemetry-lake-${var.environment}"
+  bucket        = "aegistransit-sdwan-telemetry-lake-${var.environment}"
   force_destroy = false
 }
 
@@ -96,6 +96,6 @@ resource "aws_s3_bucket_lifecycle_configuration" "telemetry_lifecycle" {
 
 # AWS Glue Data Catalog Database for Athena/RDS Federated Queries
 resource "aws_glue_catalog_database" "telemetry_catalog" {
-  name        = "commandlink_telemetry_catalog"
+  name        = "aegistransit_telemetry_catalog"
   description = "Data catalog for SD-WAN multi-carrier transit samples and 95th percentile rollups"
 }

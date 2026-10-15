@@ -1,9 +1,9 @@
 # ==============================================================================
-# CommandLink SD-WAN Telemetry Lakehouse - Outputs
+# AegisTransit SD-WAN Telemetry Lakehouse - Outputs
 # ==============================================================================
 
 output "telemetry_bucket_arn" {
-  description = "ARN of the CommandLink telemetry S3 bucket"
+  description = "ARN of the AegisTransit telemetry S3 bucket"
   value       = aws_s3_bucket.telemetry_lake.arn
 }
 

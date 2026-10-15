@@ -1,5 +1,5 @@
 -- ==============================================================================
--- CommandLink Telecom Lakehouse - Predictive Renewal Cashflow Waterfall
+-- AegisTransit Telecom Lakehouse - Predictive Renewal Cashflow Waterfall
 -- Target: PostgreSQL 16 Enterprise
 -- Simulates 12-month forward-looking financial impact of circuit contract renegotiation
 -- ==============================================================================

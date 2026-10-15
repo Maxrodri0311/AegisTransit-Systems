@@ -1,5 +1,5 @@
 -- ==============================================================================
--- CommandLink Telemetry Lakehouse - PoP Latency Arbitrage & SLA Optimization
+-- AegisTransit Telemetry Lakehouse - PoP Latency Arbitrage & SLA Optimization
 -- Target: PostgreSQL 16 Enterprise
 -- Calculates regional PoP transit efficiency, latency variance, and cost trade-offs
 -- ==============================================================================

@@ -1,5 +1,5 @@
 -- ==============================================================================
--- CommandLink Carrier Contract Survival & Churn Hazard Cohort Analysis
+-- AegisTransit Carrier Contract Survival & Churn Hazard Cohort Analysis
 -- Target: PostgreSQL 16 Enterprise
 -- Calculates empirical survival rates S(t) and contract attrition risk
 -- ==============================================================================

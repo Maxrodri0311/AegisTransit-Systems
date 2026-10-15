@@ -1,7 +1,7 @@
 """
 src/data_generator.py - Stochastic Telecom Transit & SD-WAN Telemetry Generator.
 Simulates realistic multi-carrier transit links, 95th percentile burst windows,
-and contract survival lifecycles for CommandLink (GP-260).
+and contract survival lifecycles for AegisTransit Systems.
 """
 
 import os
@@ -18,17 +18,17 @@ from src.domain.entities import CircuitLink, TrafficSample
 
 
 CARRIERS_CATALOG = [
-    {"name": "Lumen Technologies", "pop": "ORD-1 (Chicago)", "base_cir": 2000.0, "pir_factor": 2.5, "base_cost": 2200.0, "burst_rate": 2.10, "sla_lat": 16.5},
-    {"name": "Cogent Communications", "pop": "JFK-2 (New York)", "base_cir": 3000.0, "pir_factor": 3.0, "base_cost": 1850.0, "burst_rate": 1.75, "sla_lat": 22.0},
-    {"name": "Zayo Group", "pop": "DFW-1 (Dallas)", "base_cir": 1500.0, "pir_factor": 2.0, "base_cost": 1950.0, "burst_rate": 2.45, "sla_lat": 14.8},
-    {"name": "AT&T Business", "pop": "ATL-2 (Atlanta)", "base_cir": 2500.0, "pir_factor": 2.2, "base_cost": 3100.0, "burst_rate": 3.20, "sla_lat": 13.5},
-    {"name": "Comcast Business", "pop": "ORD-1 (Chicago)", "base_cir": 1000.0, "pir_factor": 2.0, "base_cost": 1100.0, "burst_rate": 2.60, "sla_lat": 24.2},
-    {"name": "Verizon Enterprise", "pop": "SJC-1 (Silicon Valley)", "base_cir": 2000.0, "pir_factor": 2.5, "base_cost": 2800.0, "burst_rate": 2.90, "sla_lat": 17.1},
+    {"name": "Apex Fiber Transit", "pop": "ORD-1 (Chicago)", "base_cir": 2000.0, "pir_factor": 2.5, "base_cost": 2200.0, "burst_rate": 2.10, "sla_lat": 16.5},
+    {"name": "Vanguard Backbone", "pop": "JFK-2 (New York)", "base_cir": 3000.0, "pir_factor": 3.0, "base_cost": 1850.0, "burst_rate": 1.75, "sla_lat": 22.0},
+    {"name": "Meridian Metro Optical", "pop": "DFW-1 (Dallas)", "base_cir": 1500.0, "pir_factor": 2.0, "base_cost": 1950.0, "burst_rate": 2.45, "sla_lat": 14.8},
+    {"name": "Atlantic Carrier Services", "pop": "ATL-2 (Atlanta)", "base_cir": 2500.0, "pir_factor": 2.2, "base_cost": 3100.0, "burst_rate": 3.20, "sla_lat": 13.5},
+    {"name": "Summit Broadband", "pop": "ORD-1 (Chicago)", "base_cir": 1000.0, "pir_factor": 2.0, "base_cost": 1100.0, "burst_rate": 2.60, "sla_lat": 24.2},
+    {"name": "Pacific Dynamic Transit", "pop": "SJC-1 (Silicon Valley)", "base_cir": 2000.0, "pir_factor": 2.5, "base_cost": 2800.0, "burst_rate": 2.90, "sla_lat": 17.1},
 ]
 
 
 def generate_reference_circuits(seed: int = 42) -> List[CircuitLink]:
-    """Generates the reference multi-carrier circuits for CommandLink PoPs."""
+    """Generates the reference multi-carrier circuits for enterprise PoP routing."""
     rng = np.random.default_rng(seed)
     circuits: List[CircuitLink] = []
 
@@ -140,7 +140,7 @@ def run_generator_pipeline(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="CommandLink Telemetry Dataset Generator.")
+    parser = argparse.ArgumentParser(description="AegisTransit Telemetry Dataset Generator.")
     parser.add_argument("--output", type=str, default="data/telemetry_dataset.csv.gz")
     parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()

@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "commandlink-finance-linear-optimization-engine"
+name = "sdwan-transit-cost-linear-optimizer"
 version = "0.1.0"
-description = "Enterprise Finance decision support system powered by LINEAR_PROGRAMMING and decoupled multi-tier architecture with strict SQL data contracts."
+description = "Enterprise SD-WAN multi-carrier transit linear cost optimizer & contract survival engine"
 authors = [
     { name = "Maximiliano Rodriguez", email = "maxrodri0311@gmail.com" }
 ]

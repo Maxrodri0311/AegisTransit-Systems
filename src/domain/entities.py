@@ -1,5 +1,5 @@
 """
-src/domain/entities.py - Pure domain models for CommandLink Cost Optimization Engine.
+src/domain/entities.py - Pure domain models for AegisTransit Cost Optimization Engine.
 Zero external I/O or vendor dependencies imported here.
 """
 

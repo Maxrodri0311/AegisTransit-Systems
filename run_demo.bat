@@ -3,8 +3,8 @@ chcp 65001 > nul
 setlocal enabledelayedexpansion
 
 echo ================================================================================
-echo   COMMANDLINK - SD-WAN TRANSIT OPTIMIZER & SURVIVAL ENGINE (GP-260)
-echo   High-Performance Linear Programming & Contract Hazard Analytics
+echo   AEGISTRANSIT - SD-WAN MULTI-CARRIER TRANSIT COST OPTIMIZER
+echo   Linear Programming & Carrier Contract Survival Radar
 echo ================================================================================
 echo.
 
@@ -36,8 +36,12 @@ echo.
 "%PY_CMD%" src/interface.py --demand 9500 --latency 22 --export-json data/optimization_report.json
 
 echo.
+echo [5/5] Opening Interactive Web Simulation Dashboard in default browser...
+start "" "web\index.html"
+
+echo.
 echo ================================================================================
-echo   Execution Complete: Sub-10ms P95 Verified & Report Exported Successfully!
+echo   Execution Complete: Sub-10ms P95 Verified & Web Dashboard Launched!
 echo ================================================================================
 echo.
 pause

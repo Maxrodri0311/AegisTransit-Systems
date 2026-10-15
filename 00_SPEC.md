@@ -1,7 +1,7 @@
-# 📐 SPEC & BLUEPRINT: CommandLink SD-WAN Transit Cost Linear Optimizer (sdwan-transit-cost-linear-optimizer)
+# 📐 SPEC & BLUEPRINT: AegisTransit SD-WAN Transit Cost Linear Optimizer (sdwan-transit-cost-linear-optimizer)
 
-**Target Company:** CommandLink | **Target Role:** Cost Optimization Analyst  
-**Delivery Paradigm:** `CLI_TUI` (Rich Executive Terminal Console)  
+**Industry Archetype:** Telecom Transit & SD-WAN Cloud MSP | **Target Role:** Telecom Cost Optimization Analyst  
+**Delivery Paradigm:** `CLI_TUI` & Interactive Web Simulator  
 **Core Algorithm:** `LINEAR_PROGRAMMING` (SciPy HiGHS Dual-Simplex/Interior-Point)  
 **Innovation Perspective:** `CAUSAL_SURVIVAL` (Kaplan-Meier Survival Curves & Cox Proportional Hazards)  
 **Repository Name:** `sdwan-transit-cost-linear-optimizer`  
@@ -9,7 +9,7 @@
 ---
 
 ## 🏛️ 1. The Core Business Bottleneck
-CommandLink operates high-performance SD-WAN and unified network management for enterprise clients across multiple Tier-1 transit providers (Lumen, Cogent, Zayo, AT&T, Comcast, Verizon). IP transit pricing follows the industry-standard **95th percentile burstable billing model**, where uncoordinated traffic spikes across links trigger overage penalties of up to 300% over committed bandwidth (CIR). 
+AegisTransit operates high-performance SD-WAN and unified network management for enterprise clients across multiple Tier-1 transit providers (Apex Fiber, Vanguard Backbone, Meridian Optical, Atlantic Carrier Services, Summit Broadband, Pacific Transit). IP transit pricing follows the industry-standard **95th percentile burstable billing model**, where uncoordinated traffic spikes across links trigger overage penalties of up to 300% over committed bandwidth (CIR). 
 
 Simultaneously, circuit contracts experience term degradation and SLA breaches without automated predictive tracking. The system solves both challenges by dynamically routing traffic via linear optimization and quantifying carrier contract churn risk.
 

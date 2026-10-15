@@ -1,5 +1,5 @@
 """
-tests/benchmark.py - Quantitative Latency Benchmark for CommandLink Cost Optimizer.
+tests/benchmark.py - Quantitative Latency Benchmark for AegisTransit Cost Optimizer.
 Measures p50, p90, p95, and p99 solver latency over 50 dynamic traffic optimization cycles.
 Enforces strict SLA constraints: p95 < 150.0 ms.
 """
@@ -66,7 +66,7 @@ def run_benchmark(iterations: int = 50, enforce_sla: bool = True):
     max_lat = float(np.max(latencies_ms))
 
     print("\n" + "="*70)
-    print("  COMMANDLINK OPTIMIZER - QUANTITATIVE LATENCY BENCHMARK (ms)")
+    print("  AEGISTRANSIT OPTIMIZER - QUANTITATIVE LATENCY BENCHMARK (ms)")
     print("="*70)
     print(f"  Iterations:     {iterations}")
     print(f"  Min Latency:    {min_lat:.2f} ms")

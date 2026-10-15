@@ -1,5 +1,5 @@
 """
-tests/test_suite.py - Unit & Integration Test Suite for CommandLink Cost Optimization Engine.
+tests/test_suite.py - Unit & Integration Test Suite for AegisTransit Cost Optimization Engine.
 Tests linear programming demand conservation, PIR constraints, and survival hazards.
 Strictly decoupled using InMemoryTelemetryStorage for sub-5ms test runs.
 """
@@ -28,7 +28,7 @@ def sample_circuits():
     return [
         CircuitLink(
             link_id="L-1",
-            carrier_name="Lumen",
+            carrier_name="Apex Fiber",
             pop_location="ORD-1",
             committed_information_rate_mbps=1000.0,
             peak_information_rate_mbps=2500.0,
@@ -41,7 +41,7 @@ def sample_circuits():
         ),
         CircuitLink(
             link_id="L-2",
-            carrier_name="Cogent",
+            carrier_name="Vanguard",
             pop_location="JFK-2",
             committed_information_rate_mbps=2000.0,
             peak_information_rate_mbps=5000.0,
@@ -54,7 +54,7 @@ def sample_circuits():
         ),
         CircuitLink(
             link_id="L-3",
-            carrier_name="Zayo",
+            carrier_name="Meridian Optical",
             pop_location="DFW-1",
             committed_information_rate_mbps=1500.0,
             peak_information_rate_mbps=3000.0,

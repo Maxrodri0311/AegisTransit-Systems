@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AegisTransit | SD-WAN Multi-Carrier Transit Cost Linear Optimizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="ambient-glow glow-cyan"></div>
+  <div class="ambient-glow glow-emerald"></div>
+
+  <!-- Top Navigation & Header -->
+  <header class="app-header">
+    <div class="brand-container">
+      <div class="brand-badge-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+      </div>
+      <div>
+        <div class="breadcrumb-trail">AEGISTRANSIT NOC &bull; FINOPS COST INTELLIGENCE</div>
+        <h1 class="brand-title">SD-WAN Transit Cost Linear Optimizer <span class="badge-tag">FINOPS v2.5</span></h1>
+      </div>
+    </div>
+    <div class="header-right-actions">
+      <!-- Live Telemetry Stream Switch -->
+      <div class="live-toggle-container">
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle-live-stream">
+          <span class="toggle-slider"></span>
+        </label>
+        <span class="live-label" id="live-stream-label">
+          <span class="pulse-beacon"></span>
+          Live Network Stream
+        </span>
+      </div>
+
+      <div class="status-indicator">
+        <span class="solver-badge">HiGHS Solver: <strong id="solver-latency-val">4.2 ms</strong></span>
+      </div>
+
+      <a href="https://github.com/Maxrodri0311/sdwan-transit-cost-linear-optimizer" target="_blank" class="btn-github">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        GitHub
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Grid Layout -->
+  <main class="main-dashboard-grid">
+    
+    <!-- Left Column: Controls & Executive Metrics -->
+    <aside class="sidebar-panel">
+      <!-- Traffic & SLA Controls Card -->
+      <div class="glass-card controls-card">
+        <div class="card-title-row">
+          <h2 class="card-heading">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+            Traffic & SLA Controls
+          </h2>
+          <span class="subtle-badge">Real-Time</span>
+        </div>
+        <p class="card-caption">Modulate multi-PoP aggregated bandwidth demands and contractual latency ceilings.</p>
+
+        <!-- Demand Slider -->
+        <div class="form-group">
+          <div class="label-row">
+            <span>Aggregated Ingress Demand</span>
+            <span class="value-readout" id="demand-val-display">9,500 Mbps</span>
+          </div>
+          <input type="range" id="demand-slider" min="4000" max="14000" step="250" value="9500" class="custom-slider">
+          <div class="slider-ticks">
+            <span>4 Gbps</span>
+            <span>9.0 Gbps (CIR Baseline)</span>
+            <span>14 Gbps</span>
+          </div>
+        </div>
+
+        <!-- Latency SLA Slider -->
+        <div class="form-group">
+          <div class="label-row">
+            <span>Global Latency SLA Budget</span>
+            <span class="value-readout" id="latency-val-display">22.0 ms</span>
+          </div>
+          <input type="range" id="latency-slider" min="14" max="32" step="0.5" value="22" class="custom-slider">
+          <div class="slider-ticks">
+            <span>14 ms (Financial HFT)</span>
+            <span>22 ms (Enterprise Core)</span>
+            <span>32 ms</span>
+          </div>
+        </div>
+
+        <!-- Workload Scenarios -->
+        <div class="form-group">
+          <label class="group-label">Enterprise Traffic Scenarios</label>
+          <div class="scenarios-grid">
+            <button class="scenario-btn active" data-demand="9500" data-latency="22.0">
+              <strong>Balanced Core</strong>
+              <span>9.5 Gbps &bull; 22ms</span>
+            </button>
+            <button class="scenario-btn" data-demand="13500" data-latency="26.0">
+              <strong>Burst Peak</strong>
+              <span>13.5 Gbps &bull; 26ms</span>
+            </button>
+            <button class="scenario-btn" data-demand="5000" data-latency="16.0">
+              <strong>Nightly Sync</strong>
+              <span>5.0 Gbps &bull; 16ms</span>
+            </button>
+            <button class="scenario-btn" data-demand="11000" data-latency="18.5">
+              <strong>PoP Failover</strong>
+              <span>11.0 Gbps &bull; 18.5ms</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Routing Strategy -->
+        <div class="form-group">
+          <label class="group-label">Mathematical Routing Engine</label>
+          <div class="segmented-pill-selector">
+            <button class="pill-btn active" data-mode="lp">
+              <span class="pill-dot green"></span>
+              HiGHS Linear Programming (Optimal)
+            </button>
+            <button class="pill-btn" data-mode="naive">
+              <span class="pill-dot yellow"></span>
+              Static Round-Robin (Unmanaged Baseline)
+            </button>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="export-btn-group">
+          <button id="btn-export-json" class="action-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Export JSON
+          </button>
+          <button id="btn-export-csv" class="action-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            Export CSV
+          </button>
+          <button id="btn-print-report" class="action-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            Print PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Financial Impact Card -->
+      <div class="glass-card financial-card">
+        <div class="card-title-row">
+          <h2 class="card-heading">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            Executive FinOps Impact
+          </h2>
+          <span class="subtle-badge" id="billing-cycle-date">Monthly Recurrence</span>
+        </div>
+        <div class="kpi-boxes-grid">
+          <div class="kpi-box">
+            <span class="kpi-box-label">Baseline Static Cost</span>
+            <span class="kpi-box-val" id="kpi-baseline">$14,720</span>
+            <span class="kpi-box-hint">Unmanaged uniform split</span>
+          </div>
+          <div class="kpi-box">
+            <span class="kpi-box-label">Optimized LP Cost</span>
+            <span class="kpi-box-val text-cyan" id="kpi-optimized">$13,000</span>
+            <span class="kpi-box-hint">Global simplex minimum</span>
+          </div>
+          <div class="kpi-box kpi-highlight-hero">
+            <div class="hero-top">
+              <span class="kpi-box-label">Net Monthly Variance Savings</span>
+              <span class="savings-badge" id="kpi-savings-pct">11.69% Variance Savings</span>
+            </div>
+            <div class="kpi-box-huge-val" id="kpi-savings">+$1,720.83 <span class="usd-unit">USD/mo</span></div>
+            <div class="annualized-notice" id="kpi-annualized">Annualized Run-Rate Savings: <strong>$20,650 USD</strong></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Column: Visualizations, Table & NOC Event Log -->
+    <section class="main-content-panel">
+      
+      <!-- Bandwidth Allocation Matrix Chart -->
+      <div class="glass-card">
+        <div class="card-header-between">
+          <div>
+            <h2 class="card-heading">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83M22 12A10 10 0 0 0 12 2v10z"/></svg>
+              Multi-Carrier Bandwidth Allocation & 95th Percentile Arbitrage
+            </h2>
+            <p class="card-caption">CIR Committed Baseline vs Allocated Traffic vs Bursting Overage Thresholds across 6 Tier-1 carriers.</p>
+          </div>
+          <div class="header-tags">
+            <span class="status-pill" id="burst-status-pill">ALL CIR COMMITTED</span>
+          </div>
+        </div>
+        <div class="chart-container-large">
+          <canvas id="allocationChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Circuits Settlement Table -->
+      <div class="glass-card">
+        <div class="card-header-between">
+          <div>
+            <h2 class="card-heading">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+              Carrier Circuit Settlement & Real-Time Telemetry Matrix
+            </h2>
+            <p class="card-caption">Click any circuit row to inspect telemetry telemetry details, BGP peering ASN, and 36-month SLA contract terms.</p>
+          </div>
+          <span class="subtle-badge">6 Circuits Active</span>
+        </div>
+        <div class="table-responsive">
+          <table class="settlement-table" id="circuits-table">
+            <thead>
+              <tr>
+                <th>Circuit ID</th>
+                <th>Carrier Partner</th>
+                <th>PoP Hub</th>
+                <th>Allocated</th>
+                <th>CIR Commit</th>
+                <th>Jitter / SLA</th>
+                <th>Status</th>
+                <th>Monthly Cost</th>
+                <th>Net Variance</th>
+              </tr>
+            </thead>
+            <tbody id="circuits-table-body">
+              <!-- Dynamically populated via app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Contract Survival Lifecycle & Churn Hazard Radar -->
+      <div class="glass-card">
+        <div class="card-header-between">
+          <div>
+            <h2 class="card-heading">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EC4899" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Carrier Contract Survival Lifecycle & Cox Hazard Churn Radar
+            </h2>
+            <p class="card-caption">Empirical Kaplan-Meier survival curves S(t) paired with Cox Proportional Hazards for renegotiation triage.</p>
+          </div>
+          <span class="subtle-badge">Weibull Decay &bull; k=1.30</span>
+        </div>
+        <div class="survival-split-grid">
+          <div class="chart-container-half">
+            <canvas id="survivalChart"></canvas>
+          </div>
+          <div class="survival-cards-feed" id="survival-recommendations">
+            <!-- Dynamically populated via app.js -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-Time NOC Audit & Operational Event Stream -->
+      <div class="glass-card audit-log-card">
+        <div class="card-header-between">
+          <h2 class="card-heading">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+            NOC Operational Event Stream & Reconciliation Audit Log
+          </h2>
+          <span class="pulse-feed-tag"><span class="tiny-pulse"></span> STREAM ACTIVE</span>
+        </div>
+        <div class="terminal-log-window" id="noc-event-log">
+          <!-- Dynamically populated with streaming logs -->
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Slide-Over Drawer for Circuit Inspection -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <aside class="circuit-drawer" id="circuit-drawer">
+    <div class="drawer-header">
+      <div>
+        <span class="drawer-circuit-id" id="drawer-circuit-id">CIRCUIT-001</span>
+        <h3 class="drawer-carrier-name" id="drawer-carrier-name">Apex Fiber Transit</h3>
+      </div>
+      <button class="drawer-close-btn" id="btn-close-drawer">&times;</button>
+    </div>
+    <div class="drawer-content">
+      <div class="drawer-meta-grid">
+        <div class="drawer-meta-item">
+          <span class="meta-label">PoP Location</span>
+          <span class="meta-val" id="drawer-pop">ORD-1 (Chicago)</span>
+        </div>
+        <div class="drawer-meta-item">
+          <span class="meta-label">BGP ASN & Route</span>
+          <span class="meta-val" id="drawer-bgp">AS-64512 (Tier-1 Optical)</span>
+        </div>
+        <div class="drawer-meta-item">
+          <span class="meta-label">Interface Specs</span>
+          <span class="meta-val" id="drawer-interface">100G-LR4 / Dual Fiber</span>
+        </div>
+        <div class="drawer-meta-item">
+          <span class="meta-label">Latency SLA Target</span>
+          <span class="meta-val" id="drawer-latency">16.5 ms (&plusmn;0.4ms)</span>
+        </div>
+      </div>
+
+      <div class="drawer-section">
+        <h4 class="drawer-section-title">95th Percentile Burstable Settlement Contract</h4>
+        <div class="drawer-pricing-box">
+          <div class="pricing-row">
+            <span>Base Committed Rate (CIR):</span>
+            <strong id="drawer-cir">2,000 Mbps</strong>
+          </div>
+          <div class="pricing-row">
+            <span>Physical Burst Ceiling (PIR):</span>
+            <strong id="drawer-pir">5,000 Mbps</strong>
+          </div>
+          <div class="pricing-row">
+            <span>Base Monthly Recurring Charge (MRC):</span>
+            <strong id="drawer-basecost">$2,200.00 USD/mo</strong>
+          </div>
+          <div class="pricing-row">
+            <span>95th Pct Burst Rate:</span>
+            <strong class="text-amber" id="drawer-burstrate">$2.10 / Mbps</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer-section">
+        <h4 class="drawer-section-title">Contract Lifecycle & Churn Hazard</h4>
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="drawer-tenure-bar" style="width: 22%;"></div>
+        </div>
+        <div class="progress-labels">
+          <span id="drawer-tenure-text">Tenure: 8 of 36 months (22%)</span>
+          <span id="drawer-hazard-text">Hazard Score: 2.51x</span>
+        </div>
+        <div class="drawer-action-callout" id="drawer-action-callout">
+          Initiate RFP re-bid immediately: contract is approaching critical churn window.
+        </div>
+      </div>
+
+      <div class="drawer-actions">
+        <button class="btn-drawer-action" id="btn-simulate-failover">Simulate Link Failover</button>
+        <button class="btn-drawer-secondary" id="btn-export-sla">Export SLA Audit Sheet</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <p>AegisTransit Systems &bull; Enterprise SD-WAN Multi-Carrier FinOps Architecture &bull; Clean Architecture (DIP)</p>
+      <p class="footer-meta">
+        Authored by <a href="https://www.linkedin.com/in/maximiliano-rodriguez-982674375/" target="_blank">Maximiliano Rodriguez</a> &bull;
+        Stack: Python 3.12, SciPy HiGHS LP Solver, PostgreSQL 16 Rollups, Terraform FinOps IaC &bull; P95 Latency &lt; 10ms
+      </p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

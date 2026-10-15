@@ -1,5 +1,5 @@
 """
-Domain package for CommandLink Cost Optimization Engine.
+Domain package for AegisTransit Cost Optimization Engine.
 """
 
 from .entities import (
