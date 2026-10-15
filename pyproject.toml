@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "commandlink-finance-linear-optimization-engine"
+version = "0.1.0"
+description = "Enterprise Finance decision support system powered by LINEAR_PROGRAMMING and decoupled multi-tier architecture with strict SQL data contracts."
+authors = [
+    { name = "Maximiliano Rodriguez", email = "maxrodri0311@gmail.com" }
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "duckdb>=0.9.0",
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "pyarrow>=14.0.0",
+    "scipy>=1.10.0",
+    "pydantic>=2.0.0",
+    "rich>=13.0.0",
+    "pytest>=7.3.0"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::UserWarning"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]

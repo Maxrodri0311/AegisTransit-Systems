@@ -1,0 +1,16 @@
+{
+  "project_id": "GP-260",
+  "project_name": "commandlink_cost_optimization_analyst_bridge_project",
+  "repo_name": "commandlink-finance-linear-optimization-engine",
+  "target_company": "CommandLink",
+  "target_role": "Cost Optimization Analyst",
+  "paradigm": "DeliveryParadigm.CLI_TUI",
+  "core_algorithm": "AlgorithmFamily.LINEAR_PROGRAMMING",
+  "generated_at": "2026-10-15T01:29:30.189010+00:00",
+  "schema_version": "1.0",
+  "validation": {
+    "token_blacklist_check": "passed",
+    "ast_security_check": "passed",
+    "py_compile_check": "passed"
+  }
+}

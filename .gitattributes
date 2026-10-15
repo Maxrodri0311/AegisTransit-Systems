@@ -1,0 +1,14 @@
+# GitHub Linguist Configuration
+# Hide auxiliary deployment, execution and build scripts from language statistics
+*.bat linguist-vendored=true
+*.cmd linguist-vendored=true
+*.ps1 linguist-vendored=true
+*.sh linguist-vendored=true
+run_demo.* linguist-vendored=true
+Makefile linguist-vendored=true
+
+# Force explicit detection of core polyglot engineering layers
+analytics/queries/*.sql linguist-detectable=true
+analytics/queries/*.sql linguist-language=SQL
+infrastructure/*.tf linguist-detectable=true
+infrastructure/*.tf linguist-language=HCL
